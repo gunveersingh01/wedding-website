@@ -1,35 +1,339 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>RSVP</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RSVP - Our Wedding</title>
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #FF3B30;
+      --primary-gradient: linear-gradient(135deg, #FF3B30, #FF9500);
+      --secondary: #ffffff;
+      --text: #1d1d1f;
+      --text-secondary: #86868b;
+      --accent: #FF9500;
+      --success: #30D158;
+      --border: #e5e5e7;
+      --input-bg: #f5f5f7;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      color: var(--text);
+      line-height: 1.47059;
+      font-weight: 400;
+      letter-spacing: -.022em;
+    }
+
+    nav {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      margin: 0 1.5rem;
+      font-size: 0.8rem;
+      font-weight: 400;
+      transition: color 0.3s ease;
+      opacity: 0.8;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+      opacity: 1;
+    }
+
+    .page-header {
+      padding: 120px 0 40px;
+      text-align: center;
+      background: linear-gradient(180deg, #ffffff 0%, #f5f5f7 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, rgba(255, 59, 48, 0.1), rgba(255, 149, 0, 0.1), rgba(48, 209, 88, 0.1));
+      animation: rotate 20s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .page-header h1 {
+      font-size: 48px;
+      line-height: 1.08349;
+      font-weight: 600;
+      letter-spacing: -.003em;
+      color: var(--text);
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-header p {
+      font-size: 21px;
+      line-height: 1.381;
+      font-weight: 400;
+      letter-spacing: .011em;
+      color: var(--text-secondary);
+      margin-top: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto 3rem;
+      padding: 0 20px;
+    }
+
+    .form-card {
+      background: var(--secondary);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      transform: translateY(20px);
+      opacity: 0;
+      animation: fadeUp 1s ease forwards;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeUp 0.5s ease forwards;
+    }
+
+    .form-group:nth-child(2) { animation-delay: 0.1s; }
+    .form-group:nth-child(3) { animation-delay: 0.2s; }
+    .form-group:nth-child(4) { animation-delay: 0.3s; }
+    .form-group:nth-child(5) { animation-delay: 0.4s; }
+    .form-group:nth-child(6) { animation-delay: 0.5s; }
+
+    label {
+      display: block;
+      font-size: 17px;
+      line-height: 1.47059;
+      font-weight: 500;
+      letter-spacing: -.022em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      font-size: 17px;
+      line-height: 1.47059;
+      font-family: inherit;
+      background: var(--input-bg);
+      color: var(--text);
+      transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: var(--secondary);
+      box-shadow: 0 0 0 4px rgba(255, 59, 48, 0.1);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: 600;
+      color: white;
+      background: var(--primary-gradient);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-top: 16px;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(255, 59, 48, 0.2);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .success-message {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--success);
+      color: white;
+      padding: 16px 32px;
+      border-radius: 100px;
+      font-weight: 500;
+      box-shadow: 0 8px 16px rgba(48, 209, 88, 0.2);
+      opacity: 0;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .success-message.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 734px) {
+      nav {
+        padding: 0.8rem;
+      }
+
+      nav a {
+        margin: 0 0.8rem;
+        font-size: 0.7rem;
+      }
+
+      .page-header {
+        padding: 100px 0 32px;
+      }
+
+      .page-header h1 {
+        font-size: 40px;
+      }
+
+      .page-header p {
+        font-size: 19px;
+      }
+
+      .form-card {
+        padding: 24px;
+        border-radius: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      input, select, textarea {
+        font-size: 16px;
+      }
+    }
+  </style>
 </head>
 <body>
   <nav>
     <a href="index.html">Home</a>
-    <a href="story.html">Our Story</a>
+    <a href="events.html">Events</a>
     <a href="gallery.html">Gallery</a>
     <a href="rsvp.html">RSVP</a>
   </nav>
 
-  <div class="container">
+  <header class="page-header">
     <h1>RSVP</h1>
-    <form id="rsvp-form" action="https://formsprese.io/f/xdkgbqja" method="POST">
-      <p><input type="text" name="name" placeholder="Your Name" required></p>
-      <p>
-        <select name="attendance" required>
-          <option value="">Will you attend?</option>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
-        </select>
-      </p>
-      <p><input type="number" name="guests" placeholder="Number of Guests" required></p>
-      <p><input type="text" name="meal" placeholder="Meal Preference (optional)"></p>
-      <p><textarea name="message" placeholder="Message" rows="4"></textarea></p>
-      <p><button type="submit">Send RSVP</button></p>
-    </form>
+    <p>We'd love to celebrate with you</p>
+  </header>
+
+  <div class="container">
+    <div class="form-card">
+      <form id="rsvp-form" action="https://formspree.io/f/xdkgbqja" method="POST">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" required placeholder="Enter your full name" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required placeholder="Enter your email" />
+        </div>
+
+        <div class="form-group">
+          <label for="attendance">Will you attend?</label>
+          <select id="attendance" name="attendance" required>
+            <option value="">Select an option</option>
+            <option value="Yes, I'll be there!">Yes, I'll be there!</option>
+            <option value="Sorry, I can't make it">Sorry, I can't make it</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="guests">Number of Guests</label>
+          <input type="number" id="guests" name="guests" min="0" max="4" required placeholder="How many guests (including you)?" />
+        </div>
+
+        <div class="form-group">
+          <label for="meal">Meal Preference</label>
+          <select id="meal" name="meal">
+            <option value="">Select your preference</option>
+            <option value="Chicken">Chicken</option>
+            <option value="Fish">Fish</option>
+            <option value="Vegetarian">Vegetarian</option>
+            <option value="Vegan">Vegan</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4" placeholder="Share your wishes or any dietary restrictions"></textarea>
+        </div>
+
+        <button type="submit">Send RSVP</button>
+      </form>
+    </div>
   </div>
 
-  <script src="js/rsvp.js"></script>
+  <div id="success-message" class="success-message">
+    Thank you for your RSVP! We can't wait to celebrate with you 🎉
+  </div>
+
+  <script>
+    document.getElementById('rsvp-form').addEventListener('submit', function(event) {
+      const message = document.getElementById('success-message');
+      message.classList.add('show');
+      setTimeout(() => {
+        message.classList.remove('show');
+      }, 5000);
+    });
+  </script>
 </body>
-</html>
+</html> 

@@ -1,20 +1,160 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Our Wedding</title>
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #000000;
+      --secondary: #ffffff;
+      --text: #1d1d1f;
+      --text-secondary: #86868b;
+      --accent: #06c;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--secondary);
+      color: var(--text);
+      line-height: 1.47059;
+      font-weight: 400;
+      letter-spacing: -.022em;
+    }
+
+    nav {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      margin: 0 1.5rem;
+      font-size: 0.8rem;
+      font-weight: 400;
+      transition: color 0.3s ease;
+      opacity: 0.8;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+      opacity: 1;
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom, #f5f5f7 0%, #ffffff 100%);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      line-height: 1.07143;
+      font-weight: 600;
+      letter-spacing: -.005em;
+      margin-bottom: 0.5em;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s ease forwards;
+    }
+
+    .hero p {
+      font-size: 28px;
+      line-height: 1.10722;
+      font-weight: 400;
+      letter-spacing: .004em;
+      color: var(--text-secondary);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s ease forwards 0.3s;
+    }
+
+    .cta-button {
+      margin-top: 2rem;
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: 980px;
+      font-size: 17px;
+      line-height: 1.17648;
+      font-weight: 400;
+      letter-spacing: -.022em;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s ease forwards 0.6s;
+      transition: all 0.3s ease;
+    }
+
+    .cta-button:hover {
+      transform: scale(1.02);
+      background-color: #0077ed;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 734px) {
+      nav {
+        padding: 0.8rem;
+      }
+
+      nav a {
+        margin: 0 0.8rem;
+        font-size: 0.7rem;
+      }
+
+      .hero h1 {
+        font-size: 40px;
+      }
+
+      .hero p {
+        font-size: 21px;
+      }
+    }
+  </style>
 </head>
 <body>
   <nav>
     <a href="index.html">Home</a>
-    <a href="story.html">Our Story</a>
+    <a href="events.html">Events</a>
     <a href="gallery.html">Gallery</a>
     <a href="rsvp.html">RSVP</a>
   </nav>
 
-  <div class="container">
-    <h1>We're Getting Married!</h1>
-    <p>Join us on <strong>July 20, 2025</strong> in Toronto, Canada</p>
-  </div>
+  <section class="hero">
+    <h1>We're Getting Married</h1>
+    <p>Join us on July 20, 2025 in Toronto, Canada.</p>
+    <a href="rsvp.html" class="cta-button">RSVP Now</a>
+  </section>
 </body>
 </html>
