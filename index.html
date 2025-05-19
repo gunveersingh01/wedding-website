@@ -4,15 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Our Wedding</title>
-  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #C41E3A;
+      --primary: #D4418E;
+      --primary-light: #FF8FB1;
       --secondary: #ffffff;
       --text: #1d1d1f;
       --text-secondary: #86868b;
       --accent: #FFD700;
+      --accent-light: #FFF4B0;
+      --purple: #9D4EDD;
+      --blue: #48CAE4;
       --overlay: rgba(255, 255, 255, 0.85);
+      --font-cursive: 'Great Vibes', cursive;
+      --font-display: 'Playfair Display', serif;
+      --font-body: 'Cormorant Garamond', serif;
     }
 
     * {
@@ -23,12 +30,15 @@
 
     body {
       margin: 0;
-      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--secondary);
+      font-family: var(--font-body);
+      background: linear-gradient(45deg, rgba(212, 65, 142, 0.02), rgba(255, 215, 0, 0.02));
       color: var(--text);
       line-height: 1.47059;
       font-weight: 400;
       letter-spacing: -.022em;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
     }
 
     nav {
@@ -51,8 +61,9 @@
       color: var(--text);
       text-decoration: none;
       margin: 0 1.5rem;
-      font-size: 0.8rem;
-      font-weight: 400;
+      font-size: 1rem;
+      font-family: var(--font-display);
+      font-weight: 500;
       transition: color 0.3s ease;
       opacity: 0.8;
     }
@@ -72,28 +83,28 @@
       padding: 2rem;
       text-align: center;
       overflow: hidden;
-      background: linear-gradient(45deg, rgba(196, 30, 58, 0.02), rgba(255, 215, 0, 0.02));
     }
 
     .hero::before {
       content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: 100%;
-      background-image: url('https://raw.githubusercontent.com/gunveersingh01/wedding-website/main/test photo.jpg');
+      height: 100vh;
+      background-image: url('https://raw.githubusercontent.com/gunveersingh01/wedding-website/main/wedding_photo.jpeg');
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
+      background-attachment: fixed;
       opacity: 0.85;
-      transform: translate(-50%, -50%);
-      animation: gentleFloat 20s ease infinite alternate;
+      z-index: -1;
+      background-color: rgba(255, 255, 255, 0.95);
     }
 
     @keyframes gentleFloat {
-      from { transform: translate(-50%, -50%) scale(0.95); }
-      to { transform: translate(-50%, -50%) scale(1); }
+      from { transform: scale(1); }
+      to { transform: scale(1.02); }
     }
 
     .hero-content {
@@ -107,13 +118,13 @@
       border: 1px solid rgba(255, 255, 255, 0.3);
       max-width: 800px;
       width: 100%;
-      animation: fadeIn 1.5s ease forwards;
+      animation: fadeInUp 1.5s ease forwards, glowPulse 4s infinite alternate;
     }
 
-    @keyframes fadeIn {
+    @keyframes fadeInUp {
       from { 
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(40px);
       }
       to { 
         opacity: 1;
@@ -121,11 +132,21 @@
       }
     }
 
+    @keyframes glowPulse {
+      0% {
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+      100% {
+        box-shadow: 0 8px 32px rgba(212, 65, 142, 0.2), 0 0 50px rgba(255, 215, 0, 0.1);
+      }
+    }
+
     .hero h1 {
-      font-size: 56px;
-      line-height: 1.07143;
-      font-weight: 600;
-      letter-spacing: -.005em;
+      font-family: var(--font-cursive);
+      font-size: 72px;
+      line-height: 1.2;
+      font-weight: 400;
+      letter-spacing: 0.02em;
       margin-bottom: 0.5em;
       color: var(--primary);
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
@@ -136,15 +157,17 @@
     }
 
     .hero p {
-      font-size: 28px;
-      line-height: 1.10722;
+      font-family: var(--font-display);
+      font-size: 32px;
+      line-height: 1.3;
       font-weight: 400;
-      letter-spacing: .004em;
+      letter-spacing: 0.01em;
       color: var(--text);
       margin-bottom: 2rem;
     }
 
     .cta-button {
+      font-family: var(--font-display);
       display: inline-block;
       padding: 16px 32px;
       background: linear-gradient(135deg, var(--primary), #FF6B6B);
@@ -153,7 +176,7 @@
       border-radius: 100px;
       font-size: 18px;
       font-weight: 500;
-      letter-spacing: -.022em;
+      letter-spacing: 0.02em;
       transition: all 0.3s ease;
       box-shadow: 0 4px 12px rgba(196, 30, 58, 0.3);
     }
@@ -190,7 +213,7 @@
 
       nav a {
         margin: 0 0.8rem;
-        font-size: 0.7rem;
+        font-size: 0.9rem;
       }
 
       .hero-content {
@@ -198,11 +221,11 @@
       }
 
       .hero h1 {
-        font-size: 40px;
+        font-size: 48px;
       }
 
       .hero p {
-        font-size: 21px;
+        font-size: 24px;
       }
 
       .cta-button {
@@ -210,9 +233,252 @@
         font-size: 16px;
       }
     }
+
+    .background-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: -1;
+      overflow: hidden;
+      background: linear-gradient(
+        45deg,
+        rgba(212, 65, 142, 0.1),
+        rgba(157, 78, 221, 0.1),
+        rgba(255, 215, 0, 0.1)
+      );
+    }
+
+    .background-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      transform: translate(-50%, -50%);
+      background-image: url('https://raw.githubusercontent.com/gunveersingh01/wedding-website/main/wedding_photo.jpeg');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.9;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: pulseBackground 10s infinite alternate;
+      mix-blend-mode: luminosity;
+    }
+
+    @keyframes pulseBackground {
+      0% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.05); }
+      100% { transform: translate(-50%, -50%) scale(1); }
+    }
+
+    .background-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        135deg,
+        rgba(212, 65, 142, 0.3) 0%,
+        rgba(157, 78, 221, 0.3) 25%,
+        rgba(72, 202, 228, 0.3) 50%,
+        rgba(255, 215, 0, 0.3) 75%,
+        rgba(255, 143, 177, 0.3) 100%
+      );
+      backdrop-filter: blur(3px);
+      animation: gradientShift 15s infinite alternate;
+      mix-blend-mode: soft-light;
+    }
+
+    .color-orbs {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .color-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.6;
+      mix-blend-mode: screen;
+      animation: floatOrb 20s infinite alternate, pulseOrb 8s infinite alternate;
+      background: radial-gradient(circle at 30% 30%,
+        rgba(255, 255, 255, 0.8) 0%,
+        currentColor 30%,
+        rgba(0, 0, 0, 0.1) 100%
+      );
+    }
+
+    .color-orb:nth-child(1) {
+      color: var(--primary);
+      width: 60vh;
+      height: 60vh;
+      top: -30vh;
+      left: -30vh;
+      animation-delay: 0s, -2s;
+    }
+
+    .color-orb:nth-child(2) {
+      color: var(--purple);
+      width: 50vh;
+      height: 50vh;
+      top: 40%;
+      right: -25vh;
+      animation-delay: -5s, -4s;
+    }
+
+    .color-orb:nth-child(3) {
+      color: var(--accent);
+      width: 55vh;
+      height: 55vh;
+      bottom: -27.5vh;
+      left: 25%;
+      animation-delay: -10s, -6s;
+    }
+
+    .color-orb:nth-child(4) {
+      color: var(--blue);
+      width: 45vh;
+      height: 45vh;
+      top: 15%;
+      left: 55%;
+      animation-delay: -15s, -8s;
+    }
+
+    @keyframes floatOrb {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      33% {
+        transform: translate(40px, -40px) scale(1.1);
+      }
+      66% {
+        transform: translate(-40px, 40px) scale(0.9);
+      }
+      100% {
+        transform: translate(20px, 20px) scale(1);
+      }
+    }
+
+    @keyframes pulseOrb {
+      0% {
+        opacity: 0.6;
+        filter: blur(80px) brightness(1);
+      }
+      50% {
+        opacity: 0.8;
+        filter: blur(100px) brightness(1.2);
+      }
+      100% {
+        opacity: 0.6;
+        filter: blur(80px) brightness(1);
+      }
+    }
+
+    @keyframes gradientShift {
+      0% {
+        background: linear-gradient(
+          135deg,
+          rgba(212, 65, 142, 0.3) 0%,
+          rgba(157, 78, 221, 0.3) 25%,
+          rgba(72, 202, 228, 0.3) 50%,
+          rgba(255, 215, 0, 0.3) 75%,
+          rgba(255, 143, 177, 0.3) 100%
+        );
+        transform: scale(1);
+      }
+      50% {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 215, 0, 0.3) 0%,
+          rgba(212, 65, 142, 0.3) 25%,
+          rgba(255, 143, 177, 0.3) 50%,
+          rgba(157, 78, 221, 0.3) 75%,
+          rgba(72, 202, 228, 0.3) 100%
+        );
+        transform: scale(1.1);
+      }
+      100% {
+        background: linear-gradient(
+          135deg,
+          rgba(157, 78, 221, 0.3) 0%,
+          rgba(72, 202, 228, 0.3) 25%,
+          rgba(255, 215, 0, 0.3) 50%,
+          rgba(212, 65, 142, 0.3) 75%,
+          rgba(255, 143, 177, 0.3) 100%
+        );
+        transform: scale(1);
+      }
+    }
+
+    .background-particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      background: radial-gradient(circle at center, 
+        rgba(255, 255, 255, 0.95),
+        rgba(255, 215, 0, 0.3),
+        rgba(212, 65, 142, 0.3),
+        rgba(157, 78, 221, 0.2)
+      );
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0;
+      box-shadow: 
+        0 0 30px rgba(255, 255, 255, 0.6),
+        0 0 60px rgba(255, 215, 0, 0.4),
+        0 0 90px rgba(212, 65, 142, 0.4),
+        0 0 120px rgba(157, 78, 221, 0.3);
+      animation: floatParticle 6s infinite ease-in-out;
+      mix-blend-mode: screen;
+    }
+
+    @keyframes floatParticle {
+      0% {
+        transform: translateY(100vh) translateX(-50px) rotate(0deg) scale(1);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.95;
+        transform: translateY(60vh) translateX(30px) rotate(120deg) scale(1.2);
+      }
+      80% {
+        opacity: 0.95;
+        transform: translateY(20vh) translateX(-30px) rotate(240deg) scale(0.8);
+      }
+      100% {
+        transform: translateY(-20vh) translateX(50px) rotate(360deg) scale(0.5);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="background-container">
+    <div class="color-orbs">
+      <div class="color-orb"></div>
+      <div class="color-orb"></div>
+      <div class="color-orb"></div>
+      <div class="color-orb"></div>
+    </div>
+    <div class="background-image" id="parallaxBg"></div>
+    <div class="background-overlay"></div>
+    <div class="background-particles" id="particles"></div>
+  </div>
+
   <nav>
     <a href="index.html">Home</a>
     <a href="events.html">Events</a>
@@ -225,10 +491,66 @@
     <div class="decorative-element"></div>
     <div class="decorative-element"></div>
     <div class="hero-content">
-      <h1>We're Getting Married</h1>
-      <p>Join us on July 20, 2025 in Toronto, Canada.</p>
+      <h1>Harneet's Sangeet and Wedding</h1>
+      <p>Join us in June!</p>
       <a href="rsvp.html" class="cta-button">RSVP Now</a>
     </div>
   </section>
+
+  <script>
+    // Enhanced parallax effect
+    document.addEventListener('mousemove', (e) => {
+      const parallaxBg = document.getElementById('parallaxBg');
+      const mouseX = e.clientX / window.innerWidth - 0.5;
+      const mouseY = e.clientY / window.innerHeight - 0.5;
+      
+      // Increased movement range and smoother animation
+      parallaxBg.style.transform = `translate(-50%, -50%) translate(${mouseX * 40}px, ${mouseY * 40}px)`;
+    });
+
+    // Enhanced particle effect
+    function createParticle() {
+      const particles = document.getElementById('particles');
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      
+      // Larger size range for particles (150px - 250px)
+      const size = Math.random() * 100 + 150;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      
+      // Random starting position with offset
+      particle.style.left = `${Math.random() * 120 - 10}%`;
+      particle.style.top = '120%';
+      
+      // Random animation duration and delay
+      const duration = Math.random() * 4 + 4;
+      const delay = Math.random() * 2;
+      particle.style.animationDuration = `${duration}s`;
+      particle.style.animationDelay = `${delay}s`;
+      
+      // Random color variation
+      const hue = Math.random() * 60 - 30; // ±30 degrees hue variation
+      particle.style.filter = `hue-rotate(${hue}deg)`;
+      
+      particles.appendChild(particle);
+      
+      // Remove particle after animation
+      setTimeout(() => {
+        particle.remove();
+      }, (duration + delay) * 1000);
+    }
+
+    // Create particles more frequently for a denser effect
+    setInterval(createParticle, 150);
+
+    // Initial burst of particles
+    for(let i = 0; i < 15; i++) {
+      setTimeout(createParticle, i * 100);
+    }
+  </script>
+
+  <!-- Authentication check -->
+  <script src="auth.js"></script>
 </body>
 </html>

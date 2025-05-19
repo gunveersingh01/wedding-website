@@ -4,15 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Our Story - Wedding</title>
-  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #C41E3A;
+      --primary: #D4418E;
+      --primary-light: #FF8FB1;
       --secondary: #ffffff;
       --text: #1d1d1f;
       --text-secondary: #86868b;
       --accent: #FFD700;
       --overlay: rgba(255, 255, 255, 0.85);
+      --font-cursive: 'Great Vibes', cursive;
+      --font-display: 'Playfair Display', serif;
+      --font-body: 'Cormorant Garamond', serif;
     }
 
     * {
@@ -23,37 +27,92 @@
 
     body {
       margin: 0;
-      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--secondary);
+      font-family: var(--font-body);
+      background: linear-gradient(45deg, rgba(212, 65, 142, 0.02), rgba(255, 215, 0, 0.02));
       color: var(--text);
       line-height: 1.47059;
       font-weight: 400;
       letter-spacing: -.022em;
-      position: relative;
       min-height: 100vh;
-      background: linear-gradient(45deg, rgba(196, 30, 58, 0.02), rgba(255, 215, 0, 0.02));
+      position: relative;
+      overflow-x: hidden;
     }
 
-    body::before {
-      content: '';
+    .background-container {
       position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .background-image {
+      position: absolute;
       top: 50%;
       left: 50%;
       width: 100%;
       height: 100%;
-      background-image: url('https://raw.githubusercontent.com/gunveersingh01/wedding-website/main/test photo.jpg');
+      transform: translate(-50%, -50%);
+      background-image: url('https://raw.githubusercontent.com/gunveersingh01/wedding-website/main/wedding_photo.jpeg');
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
-      opacity: 0.85;
-      transform: translate(-50%, -50%);
-      animation: gentleFloat 20s ease infinite alternate;
-      z-index: -1;
+      opacity: 0.9;
+      transition: transform 0.3s ease-out;
+    }
+
+    .background-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        135deg,
+        rgba(212, 65, 142, 0.15) 0%,
+        rgba(255, 143, 177, 0.15) 50%,
+        rgba(255, 215, 0, 0.15) 100%
+      );
+      backdrop-filter: blur(2px);
+    }
+
+    .background-particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0;
+      animation: floatParticle 3s infinite ease-in-out;
+    }
+
+    @keyframes floatParticle {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      50% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
     }
 
     @keyframes gentleFloat {
-      from { transform: translate(-50%, -50%) scale(0.95); }
-      to { transform: translate(-50%, -50%) scale(1); }
+      from { transform: scale(1); }
+      to { transform: scale(1.02); }
     }
 
     nav {
@@ -76,8 +135,9 @@
       color: var(--text);
       text-decoration: none;
       margin: 0 1.5rem;
-      font-size: 0.8rem;
-      font-weight: 400;
+      font-size: 1rem;
+      font-family: var(--font-display);
+      font-weight: 500;
       transition: color 0.3s ease;
       opacity: 0.8;
     }
@@ -106,8 +166,11 @@
     }
 
     .story-header h1 {
-      font-size: 48px;
-      font-weight: 600;
+      font-family: var(--font-cursive);
+      font-size: 64px;
+      line-height: 1.2;
+      font-weight: 400;
+      letter-spacing: 0.02em;
       margin-bottom: 20px;
       background: linear-gradient(135deg, var(--primary), #FF6B6B);
       -webkit-background-clip: text;
@@ -116,10 +179,12 @@
     }
 
     .story-header p {
-      font-size: 20px;
+      font-family: var(--font-display);
+      font-size: 24px;
       color: var(--text-secondary);
       max-width: 600px;
       margin: 0 auto;
+      line-height: 1.4;
     }
 
     .timeline {
@@ -173,21 +238,26 @@
     }
 
     .timeline-date {
-      font-size: 14px;
+      font-family: var(--font-cursive);
+      font-size: 24px;
       color: var(--primary);
-      font-weight: 500;
+      font-weight: 400;
       margin-bottom: 10px;
     }
 
     .timeline-title {
-      font-size: 24px;
+      font-family: var(--font-display);
+      font-size: 28px;
       margin-bottom: 15px;
       color: var(--text);
+      font-weight: 600;
     }
 
     .timeline-text {
+      font-family: var(--font-body);
       color: var(--text-secondary);
       line-height: 1.6;
+      font-size: 18px;
     }
 
     .timeline-dot {
@@ -211,7 +281,11 @@
 
     @media (max-width: 734px) {
       .story-header h1 {
-        font-size: 36px;
+        font-size: 48px;
+      }
+
+      .story-header p {
+        font-size: 20px;
       }
 
       .timeline::before {
@@ -230,10 +304,33 @@
       .timeline-dot {
         left: 30px;
       }
+
+      .timeline-title {
+        font-size: 24px;
+      }
+
+      .timeline-date {
+        font-size: 20px;
+      }
+
+      .timeline-text {
+        font-size: 16px;
+      }
+
+      nav a {
+        margin: 0 0.8rem;
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="background-container">
+    <div class="background-image" id="parallaxBg"></div>
+    <div class="background-overlay"></div>
+    <div class="background-particles" id="particles"></div>
+  </div>
+
   <nav>
     <a href="index.html">Home</a>
     <a href="events.html">Events</a>
@@ -286,5 +383,40 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // Parallax effect
+    document.addEventListener('mousemove', (e) => {
+      const parallaxBg = document.getElementById('parallaxBg');
+      const mouseX = e.clientX / window.innerWidth - 0.5;
+      const mouseY = e.clientY / window.innerHeight - 0.5;
+      
+      parallaxBg.style.transform = `translate(-50%, -50%) translate(${mouseX * 20}px, ${mouseY * 20}px)`;
+    });
+
+    // Floating particles effect
+    function createParticle() {
+      const particles = document.getElementById('particles');
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      
+      const size = Math.random() * 10 + 5;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.top = `${Math.random() * 100}%`;
+      
+      particle.style.animationDuration = `${Math.random() * 2 + 2}s`;
+      
+      particles.appendChild(particle);
+      
+      setTimeout(() => {
+        particle.remove();
+      }, 3000);
+    }
+
+    setInterval(createParticle, 300);
+  </script>
 </body>
 </html>
