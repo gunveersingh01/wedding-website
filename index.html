@@ -110,7 +110,7 @@
     .hero-content {
       position: relative;
       z-index: 2;
-      background: rgba(255, 255, 255, 0.75);
+      background: rgba(255, 255, 255, 0.85);
       padding: 3rem;
       border-radius: 24px;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -118,26 +118,17 @@
       border: 1px solid rgba(255, 255, 255, 0.3);
       max-width: 800px;
       width: 100%;
-      animation: fadeInUp 1.5s ease forwards, glowPulse 4s infinite alternate;
+      animation: fadeInUp 0.8s ease forwards;
     }
 
     @keyframes fadeInUp {
       from { 
         opacity: 0;
-        transform: translateY(40px);
+        transform: translateY(20px);
       }
       to { 
         opacity: 1;
         transform: translateY(0);
-      }
-    }
-
-    @keyframes glowPulse {
-      0% {
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      }
-      100% {
-        box-shadow: 0 8px 32px rgba(212, 65, 142, 0.2), 0 0 50px rgba(255, 215, 0, 0.1);
       }
     }
 
@@ -149,7 +140,6 @@
       letter-spacing: 0.02em;
       margin-bottom: 0.5em;
       color: var(--primary);
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
       background: linear-gradient(135deg, var(--primary), #FF6B6B);
       -webkit-background-clip: text;
       background-clip: text;
@@ -178,60 +168,16 @@
       font-weight: 500;
       letter-spacing: 0.02em;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(196, 30, 58, 0.3);
+      box-shadow: 0 4px 12px rgba(196, 30, 58, 0.2);
     }
 
     .cta-button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(196, 30, 58, 0.4);
+      box-shadow: 0 6px 16px rgba(196, 30, 58, 0.3);
     }
 
     .decorative-element {
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background: linear-gradient(45deg, rgba(196, 30, 58, 0.15), rgba(255, 215, 0, 0.15));
-      filter: blur(60px);
-      z-index: 1;
-    }
-
-    .decorative-element:nth-child(1) {
-      top: -150px;
-      left: -150px;
-    }
-
-    .decorative-element:nth-child(2) {
-      bottom: -150px;
-      right: -150px;
-    }
-
-    @media (max-width: 734px) {
-      nav {
-        padding: 0.8rem;
-      }
-
-      nav a {
-        margin: 0 0.8rem;
-        font-size: 0.9rem;
-      }
-
-      .hero-content {
-        padding: 2rem;
-      }
-
-      .hero h1 {
-        font-size: 48px;
-      }
-
-      .hero p {
-        font-size: 24px;
-      }
-
-      .cta-button {
-        padding: 14px 28px;
-        font-size: 16px;
-      }
+      display: none;
     }
 
     .background-container {
@@ -293,12 +239,7 @@
     }
 
     .color-orbs {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
+      display: none;
     }
 
     .color-orb {
@@ -418,12 +359,7 @@
     }
 
     .background-particles {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
+      display: none;
     }
 
     .particle {
@@ -464,19 +400,43 @@
         opacity: 0;
       }
     }
+
+    @media (max-width: 734px) {
+      nav {
+        padding: 0.8rem;
+      }
+
+      nav a {
+        margin: 0 0.8rem;
+        font-size: 0.9rem;
+      }
+
+      .hero-content {
+        padding: 2rem;
+        margin: 1rem;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+      }
+
+      .hero p {
+        font-size: 24px;
+      }
+
+      .cta-button {
+        padding: 14px 28px;
+        font-size: 16px;
+        width: 100%;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="background-container">
-    <div class="color-orbs">
-      <div class="color-orb"></div>
-      <div class="color-orb"></div>
-      <div class="color-orb"></div>
-      <div class="color-orb"></div>
-    </div>
     <div class="background-image" id="parallaxBg"></div>
     <div class="background-overlay"></div>
-    <div class="background-particles" id="particles"></div>
   </div>
 
   <nav>
@@ -498,55 +458,17 @@
   </section>
 
   <script>
-    // Enhanced parallax effect
-    document.addEventListener('mousemove', (e) => {
-      const parallaxBg = document.getElementById('parallaxBg');
-      const mouseX = e.clientX / window.innerWidth - 0.5;
-      const mouseY = e.clientY / window.innerHeight - 0.5;
-      
-      // Increased movement range and smoother animation
-      parallaxBg.style.transform = `translate(-50%, -50%) translate(${mouseX * 40}px, ${mouseY * 40}px)`;
-    });
-
-    // Enhanced particle effect
-    function createParticle() {
-      const particles = document.getElementById('particles');
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      
-      // Larger size range for particles (150px - 250px)
-      const size = Math.random() * 100 + 150;
-      particle.style.width = `${size}px`;
-      particle.style.height = `${size}px`;
-      
-      // Random starting position with offset
-      particle.style.left = `${Math.random() * 120 - 10}%`;
-      particle.style.top = '120%';
-      
-      // Random animation duration and delay
-      const duration = Math.random() * 4 + 4;
-      const delay = Math.random() * 2;
-      particle.style.animationDuration = `${duration}s`;
-      particle.style.animationDelay = `${delay}s`;
-      
-      // Random color variation
-      const hue = Math.random() * 60 - 30; // ±30 degrees hue variation
-      particle.style.filter = `hue-rotate(${hue}deg)`;
-      
-      particles.appendChild(particle);
-      
-      // Remove particle after animation
-      setTimeout(() => {
-        particle.remove();
-      }, (duration + delay) * 1000);
-    }
-
-    // Create particles more frequently for a denser effect
-    setInterval(createParticle, 150);
-
-    // Initial burst of particles
-    for(let i = 0; i < 15; i++) {
-      setTimeout(createParticle, i * 100);
+    // Simplified parallax with reduced movement
+    if (!window.matchMedia('(hover: none)').matches) {
+      document.addEventListener('mousemove', (e) => {
+        const parallaxBg = document.getElementById('parallaxBg');
+        const mouseX = e.clientX / window.innerWidth - 0.5;
+        const mouseY = e.clientY / window.innerHeight - 0.5;
+        
+        requestAnimationFrame(() => {
+          parallaxBg.style.transform = `translate(-50%, -50%) translate(${mouseX * 20}px, ${mouseY * 20}px)`;
+        });
+      });
     }
   </script>
 
